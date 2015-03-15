@@ -1,0 +1,24 @@
+{
+    "name": "bluehorndigital/freshbooks-sdk",
+    "type": "library",
+    "description": "SDK for interacting with Freshbooks.",
+    "authors": [
+        {
+            "name": "Matt Glaman",
+            "email": "nmd.matt@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+	    "phpunit/phpunit": "~4.0",
+        "squizlabs/php_codesniffer": "~2.3"
+    },
+    "autoload": {
+	    "psr-4": { "BluehornDigital\\FreshBooks\\": "src" }
+    },
+    "autoload-dev": {
+	    "psr-4": { 
+		    "BluehornDigital\\FreshBooks\\Tests\\": "tests"
+	    }
+    }
+}
