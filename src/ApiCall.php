@@ -2,6 +2,7 @@
 
 namespace BluehornDigital\FreshBooks;
 
+use BluehornDigital\FreshBooks\Models\Model;
 use BluehornDigital\FreshBooks\Utils\Exception;
 use BluehornDigital\FreshBooks\Utils\Request;
 
@@ -57,9 +58,12 @@ class ApiCall implements ApiCallInterface
      */
     public function get($apiId)
     {
-        return $this->newRequest('get')
+        $response = $this->newRequest('get')
             ->setBody(new \DOMElement('client_id', $apiId))
-            ->send();
+            ->send()
+            ->get();
+
+        return $this->newModel($response[$this->modelType]);
     }
 
     /**
@@ -83,7 +87,18 @@ class ApiCall implements ApiCallInterface
             $request->setBody(new \DOMElement($option, $value));
         }
 
-        return $request->send();
+        $response = $request->send()->get();
+
+        $return = array();
+
+        // API responds with results wrapped in model type's plural format.
+        $responseKey = $this->modelType . 's';
+
+        foreach ($response[$responseKey][$this->modelType] as $apiItem) {
+            $return[] = $this->newModel($apiItem);
+        }
+
+        return $return;
     }
 
     /**
@@ -106,5 +121,14 @@ class ApiCall implements ApiCallInterface
     protected function newRequest($method)
     {
         return new Request($this->api, $this->modelType . '.' . $method);
+    }
+
+    /**
+     * @param $mixed
+     *
+     * @return \BluehornDigital\FreshBooks\Models\ModelInterface
+     */
+    protected function newModel($mixed) {
+        return new Model((object) $mixed);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace BluehornDigital\FreshBooks;
 
+use BluehornDigital\FreshBooks\Models\Client;
+
 /**
  * Class Clients
  */
@@ -28,5 +30,12 @@ class Clients extends ApiCall
           'folder' => null,
           'notes' => null,
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function newModel($mixed) {
+        return new Client((object) $mixed);
     }
 }

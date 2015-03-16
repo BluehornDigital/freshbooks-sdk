@@ -24,7 +24,7 @@ interface ApiCallInterface {
     /**
      * Updates an object on the API
      *
-     * @return \BluehornDigital\FreshBooks\Utils\Response
+     * @return \BluehornDigital\FreshBooks\Models\ModelInterface
      */
     public function update();
 
@@ -51,7 +51,7 @@ interface ApiCallInterface {
      *
      * @param array $options Array of options
      *
-     * @return \BluehornDigital\FreshBooks\Utils\Response
+     * @return \BluehornDigital\FreshBooks\Models\ModelInterface[]
      */
     public function query($options = []);
 }

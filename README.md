@@ -15,7 +15,7 @@ $clientCall = new Clients($apiClient);
 // Do something!
 $response = $clientCall->query(['username' => 'janedoe']);
 
-$client = new \BluehornDigital\FreshBooks\Models\Client((object) $response['clients']['client']);
+$client = $response[0];
 
 // Display client name
 
