@@ -1,7 +1,10 @@
 <?php
 
-namespace BluehornDigital\Freshbooks;
+namespace BluehornDigital\FreshBooks;
 
+/**
+ * Class Api
+ */
 class Api
 {
     protected $apiUrl = 'https://:domain.freshbooks.com/api/2.1/xml-in';
@@ -10,8 +13,9 @@ class Api
     protected $token = '';
 
     /**
-     * @param $domain
-     * @param $token
+     * Initiates API Client
+     * @param string $domain Domain prefix
+     * @param string $token  User token
      */
     public function __construct($domain, $token)
     {
@@ -21,6 +25,7 @@ class Api
     }
 
     /**
+     * Returns the API url for domain.
      * @return mixed|string
      */
     public function getApiUrl()
@@ -29,6 +34,7 @@ class Api
     }
 
     /**
+     * Returns token provided
      * @return string
      */
     public function getToken()
@@ -37,6 +43,7 @@ class Api
     }
 
     /**
+     * Returns the domain for the API
      * @return string
      */
     public function getDomain()

@@ -2,4 +2,10 @@
 
 namespace BluehornDigital\FreshBooks\Utils;
 
-class Exception extends \Exception {}
+/**
+ * Class Exception
+ */
+class Exception extends \Exception
+{
+
+}

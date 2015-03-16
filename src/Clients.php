@@ -2,57 +2,22 @@
 
 namespace BluehornDigital\FreshBooks;
 
-use BluehornDigital\FreshBooks\Utils\Request;
-
-class Clients implements ApiCallInterface {
-
-    protected $api;
-
-    public function __construct(Api $apiClient)
-    {
-        $this->api = $apiClient;
-    }
-
-    public function create()
-    {
-
-    }
-    public function update()
-    {
-
-    }
-    public function get($apiId)
-    {
-
-    }
-    public function delete($apiId)
-    {
-
-    }
+/**
+ * Class Clients
+ */
+class Clients extends ApiCall
+{
 
     /**
-     * Queries for clients.
-     *
-     * @param array $options
-     * @return \BluehornDigital\FreshBooks\Utils\Response
+     * @var string
      */
-    public function query($options = [])
-    {
-        $request = new Request($this->api, 'client.list');
-
-        $options += $this->queryOptions();
-
-        foreach (array_filter($options) as $option => $value) {
-            $request->setBody(new \DOMElement($option, $value));
-        }
-
-        return $request->send();
-    }
+    protected $modelType = 'client';
 
     /**
      * @return array
      */
-    public function queryOptions() {
+    public function queryOptions()
+    {
         return array(
           'email' => null,
           'username' => null,

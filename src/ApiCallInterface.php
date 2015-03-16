@@ -2,37 +2,55 @@
 
 namespace BluehornDigital\FreshBooks;
 
+/**
+ * Interface ApiCallInterface
+ */
 interface ApiCallInterface {
 
     /**
-     * @param \BluehornDigital\FreshBooks\Api $apiClient
+     * API Calls must consume an API Client
+     *
+     * @param \BluehornDigital\FreshBooks\Api $apiClient API Client
      */
     public function __construct(Api $apiClient);
 
     /**
+     * Creates a object on the API
+     *
      * @return \BluehornDigital\FreshBooks\Utils\Response
      */
     public function create();
 
     /**
+     * Updates an object on the API
+     *
      * @return \BluehornDigital\FreshBooks\Utils\Response
      */
     public function update();
 
     /**
-     * @param $apiId
+     * Returns a single object from API
+     *
+     * @param string $apiId API ID
+     *
      * @return \BluehornDigital\FreshBooks\Utils\Response
      */
     public function get($apiId);
 
     /**
-     * @param $apiId
+     * Deletes an object from API
+     *
+     * @param string $apiId API ID
+     *
      * @return \BluehornDigital\FreshBooks\Utils\Response
      */
     public function delete($apiId);
 
     /**
-     * @param array $options
+     * Returns a list of objects
+     *
+     * @param array $options Array of options
+     *
      * @return \BluehornDigital\FreshBooks\Utils\Response
      */
     public function query($options = []);

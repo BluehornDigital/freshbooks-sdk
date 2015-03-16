@@ -2,19 +2,46 @@
 
 namespace BluehornDigital\FreshBooks\Utils;
 
-use BluehornDigital\Freshbooks\Api;
+use BluehornDigital\FreshBooks\Api;
 
+/**
+ * Class Request
+ */
 class Request
 {
+    /**
+     * API client
+     *
+     * @var \BluehornDigital\Freshbooks\Api
+     */
     protected $apiClient;
+
+    /**
+     * The API call method
+     * @var string
+     */
     protected $method;
 
-    /** @var  \DOMDocument */
+    /**
+     * DOMDocument representation of XML request.
+     *
+     * @var \DOMDocument
+     */
     protected $xmlDocument;
-    /** @var  \DOMElement */
+
+    /**
+     * Request element in XML request.
+     *
+     * @var \DOMElement
+     */
     protected $xmlMethodElement;
 
-
+    /**
+     * Initiates request XML
+     *
+     * @param \BluehornDigital\FreshBooks\Api $apiClient API Client
+     * @param string                          $method    API call method
+     */
     public function __construct(Api $apiClient, $method)
     {
         $this->apiClient = $apiClient;
@@ -23,22 +50,49 @@ class Request
         $this->setMethod();
     }
 
-    protected function setMethod() {
+    /**
+     * Sets the API call method XML element.
+     *
+     * @return self
+     */
+    protected function setMethod()
+    {
         $methodElement = $this->xml->createElement('request');
         $methodElement->setAttribute('method', $this->method);
         $this->xmlMethodElement = $methodElement;
+        return $this;
     }
 
-    public function setBody(\DOMElement $body) {
+    /**
+     * Adds an element to the request body
+     *
+     * @param \DOMElement $body Element to append.
+     *
+     * @return $this
+     */
+    public function setBody(\DOMElement $body)
+    {
         $this->xmlMethodElement->appendChild($body);
+        return $this;
     }
 
+    /**
+     * Returns request XML
+     *
+     * @return string
+     */
     public function getXML()
     {
         $this->xml->appendChild($this->xmlMethodElement);
         return $this->xml->saveXML();
     }
 
+    /**
+     * Sends request to FreshBooks API
+     *
+     * @return \BluehornDigital\FreshBooks\Utils\Response
+     * @throws \BluehornDigital\FreshBooks\Utils\Exception
+     */
     public function send()
     {
         $ch = curl_init();

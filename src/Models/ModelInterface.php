@@ -2,9 +2,24 @@
 
 namespace BluehornDigital\Freshbooks\Models;
 
+/**
+ * Interface ModelInterface
+ */
 interface ModelInterface
 {
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return mixed
+     */
     public function set($key, $value);
+
+    /**
+     * @param $key
+     *
+     * @return mixed
+     */
     public function get($key);
 
     /**
