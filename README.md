@@ -4,7 +4,7 @@ A PHP library for interacting with the FreshBooks API!
 
 ### Usage
 
-````
+````php
 
 // Initiate an API client with your FreshBooks domain prefix and token.
 $apiClient = new \BluehornDigital\FreshBooks\Api('domain', 'profileToken');
