@@ -27,6 +27,11 @@ class ApiCall implements ApiCallInterface
     protected $modelType;
 
     /**
+     * @var string
+     */
+    protected $modelTypePlural;
+
+    /**
      * @inheritdoc
      */
     public function __construct(Api $apiClient)
@@ -59,7 +64,7 @@ class ApiCall implements ApiCallInterface
     public function get($apiId)
     {
         $response = $this->newRequest('get')
-            ->setBody(new \DOMElement('client_id', $apiId))
+            ->setBody(new \DOMElement($this->modelType . '_id', $apiId))
             ->send()
             ->get();
 
@@ -92,7 +97,7 @@ class ApiCall implements ApiCallInterface
         $return = array();
 
         // API responds with results wrapped in model type's plural format.
-        $responseKey = $this->modelType . 's';
+        $responseKey = $this->modelTypePlural;
 
         foreach ($response[$responseKey][$this->modelType] as $apiItem) {
             $return[] = $this->newModel($apiItem);

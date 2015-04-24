@@ -2,23 +2,23 @@
 
 namespace BluehornDigital\FreshBooks;
 
-use BluehornDigital\FreshBooks\Models\Client;
+use BluehornDigital\FreshBooks\Models\TimeEntry;
 
 /**
  * Class Clients
  */
-class Clients extends ApiCall
+class TimeEntries extends ApiCall
 {
 
     /**
      * @inheritdoc
      */
-    protected $modelType = 'client';
+    protected $modelType = 'time_entry';
 
     /**
      * @inheritdoc
      */
-    protected $modelTypePlural = 'clients';
+    protected $modelTypePlural = 'time_entries';
 
     /**
      * @return array
@@ -26,14 +26,12 @@ class Clients extends ApiCall
     public function queryOptions()
     {
         return array(
-          'email' => null,
-          'username' => null,
-          'updated_form' => null,
-          'updated_to' => null,
+          'project_id' => null,
+          'task_id' => null,
+          'date_from' => null,
+          'date_to' => null,
           'page' => null,
           'per_page' => null,
-          'folder' => null,
-          'notes' => null,
         );
     }
 
@@ -41,6 +39,6 @@ class Clients extends ApiCall
      * @inheritdoc
      */
     protected function newModel($mixed) {
-        return new Client((object) $mixed);
+        return new TimeEntry((object) $mixed);
     }
 }
